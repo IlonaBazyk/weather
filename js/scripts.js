@@ -105,76 +105,77 @@ $(document).ready(function(){
 
 
 
+
 function arrDays(day){
-	var arr = ["пн", "вт", "ср", "чт", "пт", "сб", "нд"]
-	var arr1 = []
-	for (var i = arr.indexOf(day); i<7; i++){
-		arr1.push(arr[i])
-	}
-	for (var j = 0; j<arr.indexOf(day); j++){
-		arr1.push(arr[j])
-	}
-	return arr1
+  var arr = ["пн", "вт", "ср", "чт", "пт", "сб", "нд"]
+  var arr1 = []
+  for (var i = arr.indexOf(day); i<7; i++){
+    arr1.push(arr[i])
+  }
+  for (var j = 0; j<arr.indexOf(day); j++){
+    arr1.push(arr[j])
+  }
+  return arr1
 }
 
 function timestamp2date(timestamp) { 
-	var theDate = new Date(timestamp * 1000); 
-	return theDate.toGMTString(); 
+    var theDate = new Date(timestamp * 1000); 
+    return theDate.toGMTString(); 
 }
 
 function getfiveDays(today, month, nameday){
 	for (var i = 1; i < 5; i++) {
 		$('.days').eq(i).find('.date>span').text(Number(today) + Number(i) + ' ' + month)	
-		$('.days').eq(i).find('.day-name').text(arrDays(nameday)[i])
+        $('.days').eq(i).find('.day-name').text(arrDays(nameday)[i])
 	}		
 }
 
 function getDayOfWeek(number){
 	switch (number) {
-		case 'Mon':
+	case 'Mon':
 		return 'пн';
-		case 'Tue':
+	case 'Tue':
 		return 'вт';
-		case 'Wed':
+	case 'Wed':
 		return 'ср'
-		case 'Thu':
+	case 'Thu':
 		return 'чт';
-		case 'Fri':
+	case 'Fri':
 		return 'пт';
-		case 'Sat':
+    case 'Sat':
 		return 'сб';
-		case 'Sun':
+	case 'Sun':
 		return 'нд';
 	}
 }
 
 function getMonth(number){
 	switch (number) {
-		case 'Jan':
+	case 'Jan':
 		return 'січня';
-		case 'Feb':
+	case 'Feb':
 		return 'лютого';
-		case 'Mar':
+	case 'Mar':
 		return 'березня';
-		case 'Apr':
+	case 'Apr':
 		return 'квітня';
-		case 'May':
+	case 'May':
 		return 'травня';
-		case 'Jun':
+	case 'Jun':
 		return 'червня';
-		case 'Jul':
+	case 'Jul':
 		return 'липня';
-		case 'Aug':
+	case 'Aug':
 		return 'серпня';
-		case 'Sep':
+	case 'Sep':
 		return 'вересня';
-		case 'Oct':
+	case 'Oct':
 		return 'жовтня';
-		case 'Nov':
+	case 'Nov':
 		return 'листопада';
-		case 'Dec':
+	case 'Dec':
 		return 'грудня';
-	}
+    }
 }
 
 
