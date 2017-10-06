@@ -10,6 +10,7 @@ $(document).ready(function(){
 		$('#weather_desc>span').text(data1.list[0].weather[0].description)
 		$('#icon>span').text(data1.list[0].weather[0].icon)
 		$('#clouds>span').text(data1.list[0].clouds.all)	
+		// $('img#main-img').attr('src', 'http://openweathermap.org/img/w/' + data1.list[0].weather[0].icon + '.png')
 		var date = timestamp2date(data1.list[0].dt)
 		var day = Number(date.slice(6,8))
 		var month = getMonth(date.slice(8,11))

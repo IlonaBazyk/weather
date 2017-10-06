@@ -4,6 +4,8 @@
 --------------------------*/
 
 *{
+	margin: 0;
+	padding: 0;
 	box-sizing: border-box;
 }
 
@@ -107,8 +109,43 @@ width: 100%;
 	cursor: pointer;
 }
 .main-block {
+	width: 67%;
 	border: 1px solid red;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.main-block .main-info {
+	// display: flex;
+	// justify-content: space-around;
+	// border: 1px solid green;
+}
+
+.main-block .main-info > div, .main-block .main-info #main-img {
 	display: inline-block;
+	vertical-align: middle;
+}
+
+.main-block .main-info .name {
+	color: #fff;
+	display: inline-block;
+	font-size: 45px;
+	// font-family: 'BetinaScriptC', arial;
+}
+.main-block .main-info #weather_desc {
+	color: #fff;
+	font-size: 35px;
+
+	// font-family: 'BetinaScriptC', arial;
+	// text-transform: uppercase;
+	font-style: italic;
+}
+
+.main-block .main-info #temp {
+		color:#fff;
+	font-size: 65px;
+	font-family: 'BetinaScriptC', arial;
+	margin-right: 40px;
 }
 // .left-block .days .inside_cont {
 // 	height: 100%;
