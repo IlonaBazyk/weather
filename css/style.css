@@ -110,7 +110,7 @@ width: 100%;
 }
 .main-block {
 	width: 67%;
-	border: 1px solid red;
+	// border: 1px solid red;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -124,6 +124,7 @@ width: 100%;
 .main-block .main-info > div, .main-block .main-info #main-img {
 	display: inline-block;
 	vertical-align: middle;
+	color: #1562a4;
 }
 
 .main-block .main-info .name {

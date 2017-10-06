@@ -184,9 +184,9 @@ $('.city').click(function(){
 	$.get('https://api.openweathermap.org/data/2.5/forecast?id=' + id +'&units=metric&lang=ua&APPID=fd67a390d12405e06869f5d1fe3504cd', function(data1){
 		$('#name').text(data1.city.name)
 		$('#humidity>span').text(data1.list[0].main.humidity)
-		$('#temp>span').text(data1.list[0].main.temp) 
-		$('#temp_max>span').text(getMaxTempToday(searchIndexNext())) 
-		$('#temp_min>span').text(getMinTempToday(searchIndexNext()))
+		$('#temp>span').text(Math.round(data1.list[0].main.temp))
+		$('#temp_max>span').text(Math.round(getMaxTempToday(searchIndexNext())))
+		$('#temp_min>span').text(Math.round(getMinTempToday(searchIndexNext())))
 		$('#wind_deg>span').text(data1.list[0].wind.deg)
 		$('#wind_speed>span').text(data1.list[0].wind.speed)
 		$('#weather_desc>span').text(data1.list[0].weather[0].description)
@@ -251,12 +251,12 @@ $('.city').click(function(){
 		}
 
 		function sendTempIcon(ind){
-			$('.days').eq(0).find('.temp-max').text(getMaxTempToday(ind))
-			$('.days').eq(0).find('.temp-min').text(getMinTempToday(ind))
+			$('.days').eq(0).find('.temp-max').text(Math.round(getMaxTempToday(ind)))
+			$('.days').eq(0).find('.temp-min').text(Math.round(getMinTempToday(ind)))
 			for (var i=0; i<4; i++){
 				var dopInd = ind + 8*i
-				$('.days').eq(i+1).find('.temp-max').text(getMaxTemp(dopInd))
-				$('.days').eq(i+1).find('.temp-min').text(getMinTemp(dopInd))
+				$('.days').eq(i+1).find('.temp-max').text(Math.round(getMaxTemp(dopInd)))
+				$('.days').eq(i+1).find('.temp-min').text(Math.round(getMinTemp(dopInd)))
 				$('.days').eq(i+1).find('img').attr('src', 'http://openweathermap.org/img/w/'+ geticon(dopInd) +'.png')
 
 			}
