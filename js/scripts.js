@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$.get('https://api.openweathermap.org/data/2.5/forecast?id=703448&units=metric&lang=ua&APPID=fd67a390d12405e06869f5d1fe3504cd', function(data1){
 		$('#name').text(data1.city.name)
 		$('#humidity>span').text(data1.list[0].main.humidity)
-		$('#temp>span').text(data1.list[0].main.temp) 
+		$('#temp>span').text(Math.round(data1.list[0].main.temp))
 		$('#temp_max>span').text(getMaxTempToday(searchIndexNext())) 
 		$('#temp_min>span').text(getMinTempToday(searchIndexNext()))
 		$('#wind_deg>span').text(data1.list[0].wind.deg)
@@ -37,7 +37,7 @@ $(document).ready(function(){
 					num=Number(data1.list[i].main.temp_min)
 				}
 			}
-			return num
+			return Math.round(num)
 		}
 		function getMaxTempToday(ind) {
 			var num=Number(data1.list[0].main.temp_max)
@@ -46,7 +46,7 @@ $(document).ready(function(){
 					num=Number(data1.list[i].main.temp_max)
 				}
 			}
-			return num
+			return Math.round(num)
 		}
 
 
@@ -57,7 +57,7 @@ $(document).ready(function(){
 					num=Number(data1.list[i].main.temp_min)
 				}
 			}
-			return num
+			return Math.round(num)
 		}
 		function getMaxTemp(ind) {
 			var num=Number(data1.list[ind].main.temp_max)
@@ -66,7 +66,7 @@ $(document).ready(function(){
 					num=Number(data1.list[i].main.temp_max)
 				}
 			}
-			return num
+			return Math.round(num)
 		}
 
 		function sendTempIcon(ind){

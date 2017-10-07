@@ -44,6 +44,10 @@ width: 100%;
 	cursor: pointer;
 }
 
+.city:hover {
+	transform: skewX(-20deg);
+}
+
 .middle-block {
 	display: flex;
 	justify-content: flex-start;
@@ -108,6 +112,10 @@ width: 100%;
 	text-decoration: underline;
 	cursor: pointer;
 }
+.days:hover {
+  transform: scale(1.25, 1.25) translateX(30px);
+
+}
 .main-block {
 	width: 67%;
 	// border: 1px solid red;
@@ -118,7 +126,7 @@ width: 100%;
 .main-block .main-info {
 	// display: flex;
 	// justify-content: space-around;
-	// border: 1px solid green;
+	border: 1px solid green;
 }
 
 .main-block .main-info > div, .main-block .main-info #main-img {
@@ -147,6 +155,14 @@ width: 100%;
 	font-size: 65px;
 	font-family: 'BetinaScriptC', arial;
 	margin-right: 40px;
+}
+
+.detail-info {
+	border: 1px solid green;
+}
+
+.detail-info .forecast {
+	display: inline-block;
 }
 // .left-block .days .inside_cont {
 // 	height: 100%;
