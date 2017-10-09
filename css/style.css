@@ -112,8 +112,8 @@ width: 100%;
 	text-decoration: underline;
 	cursor: pointer;
 }
-.days:hover {
-  transform: scale(1.25, 1.25) translateX(30px);
+.days:hover .date {
+  transform: scale(1.4, 1.25) translateX(30px);
 
 }
 .main-block {
@@ -158,11 +158,19 @@ width: 100%;
 }
 
 .detail-info {
-	border: 1px solid green;
+	// border: 1px solid green;
 }
 
-.detail-info .forecast {
-	display: inline-block;
+
+table {
+	border: none;
+	margin: 0 auto;
+   }
+
+th, tr, td {
+	background: rgba(255,255,255, 0.39);
+	border: none;
+	box-shadow: 3.7px 3.3px 10px rgba(0, 0, 0, 0.75);
 }
 // .left-block .days .inside_cont {
 // 	height: 100%;
