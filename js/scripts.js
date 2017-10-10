@@ -12,7 +12,7 @@ $(document).ready(function(){
 		$('#clouds>span').text(data1.list[0].clouds.all)	
 		// $('img#main-img').attr('src', 'http://openweathermap.org/img/w/' + data1.list[0].weather[0].icon + '.png')
 		var date = timestamp2date(data1.list[0].dt)
-		var day = Number(date.slice(6,8))
+		var day = Number(date.slice(5,7))
 		var month = getMonth(date.slice(8,11))
 		var DayOfWeek = getDayOfWeek(date.slice(0, 3))
 		$('.days').eq(0).find('.date>span').text(day + ' ' + month)
@@ -98,12 +98,28 @@ $(document).ready(function(){
 				return arr[7]
 			}
 		}
-
+function  fillDataNextDay(ind, tableInd){
+      for (var i=0; i< 8; i++){
+          $('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'http://openweathermap.org/img/w/' + data1.list[ind+i].weather[0].icon + '.png')
+          $('table').eq(tableInd).find('tr:eq(3) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
+          $('table').eq(tableInd).find('tr:eq(4) td').eq(i+1).text(Math.round(data1.list[ind+i].main.pressure))
+          $('table').eq(tableInd).find('tr:eq(5) td').eq(i+1).text(Math.round(data1.list[ind+i].clouds.all))
+          $('table').eq(tableInd).find('tr:eq(6) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
+          $('table').eq(tableInd).find('tr:eq(7) td').eq(i+1).text(Math.round(data1.list[ind+i].wind.speed))
+        }
+    }
+    fillDataNextDay(searchIndexNext(), 1)
+      fillDataNextDay(searchIndexNext()+8, 2)
+      fillDataNextDay(searchIndexNext()+16, 3)
+      fillDataNextDay(searchIndexNext()+24, 4)
 	});
 })
 
 
-
+$('.date').click(function(){
+    $('table').hide()
+    $('#' + $(this).data('target')).show()    
+})
 
 
 function arrDays(day){
