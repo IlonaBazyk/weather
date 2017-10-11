@@ -1,6 +1,5 @@
 $(document).ready(function(){  
 	$.get('https://api.openweathermap.org/data/2.5/forecast?id=703448&units=metric&lang=ua&APPID=fd67a390d12405e06869f5d1fe3504cd', function(data1){
-		$('#name').text(data1.city.name)
 		$('#humidity>span').text(data1.list[0].main.humidity)
 		$('#temp>span').text(Math.round(data1.list[0].main.temp))
 		$('#temp_max>span').text(getMaxTempToday(searchIndexNext())) 
@@ -10,7 +9,7 @@ $(document).ready(function(){
 		$('#weather_desc>span').text(data1.list[0].weather[0].description)
 		$('#icon>span').text(data1.list[0].weather[0].icon)
 		$('#clouds>span').text(data1.list[0].clouds.all)	
-		// $('img#main-img').attr('src', 'http://openweathermap.org/img/w/' + data1.list[0].weather[0].icon + '.png')
+		$('img#main-img').attr('src', 'http://openweathermap.org/img/w/' + data1.list[0].weather[0].icon + '.png')
 		var date = timestamp2date(data1.list[0].dt)
 		var day = Number(date.slice(5,7))
 		var month = getMonth(date.slice(8,11))
@@ -98,6 +97,49 @@ $(document).ready(function(){
 				return arr[7]
 			}
 		}
+
+ function  fillDataCarentDay(){
+        var k
+        switch (data1.list[0].dt_txt.slice(11,16)) {
+		case '00:00':
+		k = '1';
+        break;
+		case '03:00':
+		k = '2';
+        break;
+		case '06:00':
+		k = '3';
+        break;
+		case '09:00':
+		k = '4';
+        break;
+		case '12:00':
+		k = '5';
+        break;
+		case '15:00':
+		k = '6';
+        break;
+		case '18:00':
+		k = '7';
+        break;
+          case '21:00':
+		k = '8';
+        break;
+	}
+        var l = 0
+        for (var i=k; i<9; i++){
+          $('table:eq(0) tr:eq(2) td img').eq(i-1).attr('src', 'http://openweathermap.org/img/w/' + data1.list[i].weather[0].icon + '.png')
+          $('table:eq(0) tr:eq(3) td').eq(i).text(Math.round(data1.list[l].main.temp))
+          $('table:eq(0) tr:eq(4) td').eq(i).text(Math.round(data1.list[l].main.pressure))
+          $('table:eq(0) tr:eq(5) td').eq(i).text(Math.round(data1.list[l].clouds.all))
+          $('table:eq(0) tr:eq(6) td').eq(i).text(Math.round(data1.list[l].main.temp))
+          $('table:eq(0) tr:eq(7) td').eq(i).text(Math.round(data1.list[l].wind.speed))
+          l++
+        }
+      }
+    
+      fillDataCarentDay()
+
 function  fillDataNextDay(ind, tableInd){
       for (var i=0; i< 8; i++){
           $('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'http://openweathermap.org/img/w/' + data1.list[ind+i].weather[0].icon + '.png')
@@ -118,7 +160,14 @@ function  fillDataNextDay(ind, tableInd){
 
 $('.date').click(function(){
     $('table').hide()
-    $('#' + $(this).data('target')).show()    
+    $('.date').removeClass('active') 
+    $(this). addClass('active')
+    $('#' + $(this).data('target')).show()  
+    if ($(this).data('target') !== 'table0'){
+    	$('.main-info').addClass('hide')
+    }else{
+    	$('.main-info').removeClass('hide')
+    }  
 })
 
 
@@ -196,9 +245,10 @@ function getMonth(number){
 
 
 $('.city').click(function(){  
+	var nameCity = $(this).data('name')
 	var id = $(this).data('id')
 	$.get('https://api.openweathermap.org/data/2.5/forecast?id=' + id +'&units=metric&lang=ua&APPID=fd67a390d12405e06869f5d1fe3504cd', function(data1){
-		$('#name').text(data1.city.name)
+		$('.title').text(nameCity)
 		$('#humidity>span').text(data1.list[0].main.humidity)
 		$('#temp>span').text(Math.round(data1.list[0].main.temp))
 		$('#temp_max>span').text(Math.round(getMaxTempToday(searchIndexNext())))
@@ -208,8 +258,9 @@ $('.city').click(function(){
 		$('#weather_desc>span').text(data1.list[0].weather[0].description)
 		$('#icon>span').text(data1.list[0].weather[0].icon)
 		$('#clouds>span').text(data1.list[0].clouds.all)	
+		$('img#main-img').attr('src', 'http://openweathermap.org/img/w/' + data1.list[0].weather[0].icon + '.png')
 		var date = timestamp2date(data1.list[0].dt)
-		var day = Number(date.slice(6,8))
+		var day = Number(date.slice(5,7))
 		var month = getMonth(date.slice(8,11))
 		var DayOfWeek = getDayOfWeek(date.slice(0, 3))
 		$('.days').eq(0).find('.date>span').text(day + ' ' + month)
@@ -295,6 +346,63 @@ $('.city').click(function(){
 				return arr[7]
 			}
 		}
+
+ function  fillDataCarentDay(){
+        var k
+        switch (data1.list[0].dt_txt.slice(11,16)) {
+		case '00:00':
+		k = '1';
+        break;
+		case '03:00':
+		k = '2';
+        break;
+		case '06:00':
+		k = '3';
+        break;
+		case '09:00':
+		k = '4';
+        break;
+		case '12:00':
+		k = '5';
+        break;
+		case '15:00':
+		k = '6';
+        break;
+		case '18:00':
+		k = '7';
+        break;
+          case '21:00':
+		k = '8';
+        break;
+	}
+        var l = 0
+        for (var i=k; i<9; i++){
+          $('table:eq(0) tr:eq(2) td img').eq(i-1).attr('src', 'http://openweathermap.org/img/w/' + data1.list[i].weather[0].icon + '.png')
+          $('table:eq(0) tr:eq(3) td').eq(i).text(Math.round(data1.list[l].main.temp))
+          $('table:eq(0) tr:eq(4) td').eq(i).text(Math.round(data1.list[l].main.pressure))
+          $('table:eq(0) tr:eq(5) td').eq(i).text(Math.round(data1.list[l].clouds.all))
+          $('table:eq(0) tr:eq(6) td').eq(i).text(Math.round(data1.list[l].main.temp))
+          $('table:eq(0) tr:eq(7) td').eq(i).text(Math.round(data1.list[l].wind.speed))
+          l++
+        }
+      }
+    
+      fillDataCarentDay()
+		
+		function  fillDataNextDay(ind, tableInd){
+      for (var i=0; i< 8; i++){
+          $('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'http://openweathermap.org/img/w/' + data1.list[ind+i].weather[0].icon + '.png')
+          $('table').eq(tableInd).find('tr:eq(3) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
+          $('table').eq(tableInd).find('tr:eq(4) td').eq(i+1).text(Math.round(data1.list[ind+i].main.pressure))
+          $('table').eq(tableInd).find('tr:eq(5) td').eq(i+1).text(Math.round(data1.list[ind+i].clouds.all))
+          $('table').eq(tableInd).find('tr:eq(6) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
+          $('table').eq(tableInd).find('tr:eq(7) td').eq(i+1).text(Math.round(data1.list[ind+i].wind.speed))
+        }
+    }
+    fillDataNextDay(searchIndexNext(), 1)
+      fillDataNextDay(searchIndexNext()+8, 2)
+      fillDataNextDay(searchIndexNext()+16, 3)
+      fillDataNextDay(searchIndexNext()+24, 4)
 	}); 
 })
 

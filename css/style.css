@@ -45,7 +45,7 @@ width: 100%;
 }
 
 .city:hover {
-	transform: skewX(-20deg);
+	color: #98d0eb;
 }
 
 .middle-block {
@@ -121,12 +121,15 @@ width: 100%;
 	// border: 1px solid red;
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
+	justify-content: flex-start;
+	// border: 1px solid green;
 }
 .main-block .main-info {
+	// display: none;
 	// display: flex;
-	// justify-content: space-around;
-	border: 1px solid green;
+	// margin: auto;
+	// justify-content: center;
+	// border: 1px solid green;
 }
 
 .main-block .main-info > div, .main-block .main-info #main-img {
@@ -135,10 +138,12 @@ width: 100%;
 	color: #1562a4;
 }
 
-.main-block .main-info .name {
+.main-block .title {
 	color: #fff;
 	display: inline-block;
 	font-size: 45px;
+	margin: 0 auto;
+	// border: 1px solid green;
 	// font-family: 'BetinaScriptC', arial;
 }
 .main-block .main-info #weather_desc {
@@ -159,69 +164,45 @@ width: 100%;
 
 .detail-info {
 	// border: 1px solid green;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
 }
 
+.active {
+	transform: scale(1.4, 1.25) translateX(30px);
+}
+
+.hide {
+	display: none;
+}
 
 table {
 	border: none;
-	margin: 0 auto;
+	margin: auto;
+	font-family: 'Lobster', cursive;
+	border-spacing: 2px;
    }
 
+#table1, #table2, #table3, #table4 {
+	display: none;
+}
+
+th:first-child {
+	visibility: hidden;
+}
 th, tr, td {
 	background: rgba(255,255,255, 0.39);
 	border: none;
-	box-shadow: 3.7px 3.3px 10px rgba(0, 0, 0, 0.75);
+	padding: 8px 15px 8px 15px;
+	text-align: center;
+	// box-shadow: 3.7px 3.3px 37px rgba(0, 0, 0, 0.75);
 }
-// .left-block .days .inside_cont {
-// 	height: 100%;
-// }
+th {
+	text-transform: uppercase;
+}
 
-// .left-block .days span {
-// 	width: 50px;
-// 	height: 50px;
-// 	background-color: #fff;
-// 	color: red;
-// }
-
-// .temperature {
-// 	font-size: 5em;
-// 	margin: auto;
-// 	// border: 1px solid #000;
-// 	color: #fff;
-// }
-// .top_container{
-// 	// border:1px solid #fff;
-// 	display: flex;
-// 	justify-content: space-around;
-// }
-
-// .top_container .block {
-// 	 width: 10em;
-//   height: 2em;
-// 	border: 1px solid #fff;
-// 	text-align: center;
-// }
-
-// 
-
-// .left_container {
-// 	border:1px solid #fff;
-// 	width: 450px;
-
-// 	display: flex;
-// 	flex-direction: column;
-// 	justify-content: space-around;
-// }
-
-// .left_container .days {
-// 	border:1px solid #fff;
-// 	height: 15%;
-// }
-
-// .left_container .block p {
-// 	// border:1px solid black;
-// 	transform: rotate(90deg);
-// 	font-size: 1.2em;
-
-// }
-
+td:first-child {
+	margin: 10px;
+}
