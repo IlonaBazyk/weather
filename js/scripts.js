@@ -9,13 +9,13 @@ $(document).ready(function(){
 		$('#weather_desc>span').text(data1.list[0].weather[0].description)
 		$('#icon>span').text(data1.list[0].weather[0].icon)
 		$('#clouds>span').text(data1.list[0].clouds.all)	
-		$('img#main-img').attr('src', 'http://openweathermap.org/img/w/' + data1.list[0].weather[0].icon + '.png')
+		$('img#main-img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
 		var date = timestamp2date(data1.list[0].dt)
 		var day = Number(date.slice(5,7))
 		var month = getMonth(date.slice(8,11))
 		var DayOfWeek = getDayOfWeek(date.slice(0, 3))
 		$('.days').eq(0).find('.date>span').text(day + ' ' + month)
-		$('.days').eq(0).find('img').attr('src', 'http://openweathermap.org/img/w/' + data1.list[0].weather[0].icon + '.png')
+		$('.days').eq(0).find('img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
 		$('.days').eq(0).find('.day-name').text(DayOfWeek)
 		getfiveDays(day, month, DayOfWeek)
 		console.log(data1)
@@ -75,7 +75,7 @@ $(document).ready(function(){
 				var dopInd = ind + 8*i
 				$('.days').eq(i+1).find('.temp-max').text(getMaxTemp(dopInd))
 				$('.days').eq(i+1).find('.temp-min').text(getMinTemp(dopInd))
-				$('.days').eq(i+1).find('img').attr('src', 'http://openweathermap.org/img/w/'+ geticon(dopInd) +'.png')
+				$('.days').eq(i+1).find('img').attr('src', 'images/'+ geticon(dopInd) +'.png')
 
 			}
 		}
@@ -128,7 +128,7 @@ $(document).ready(function(){
 	}
         var l = 0
         for (var i=k; i<9; i++){
-          $('table:eq(0) tr:eq(2) td img').eq(i-1).attr('src', 'http://openweathermap.org/img/w/' + data1.list[i].weather[0].icon + '.png')
+          $('table:eq(0) tr:eq(2) td img').eq(i-1).attr('src', 'images/' + data1.list[i].weather[0].icon + '.png')
           $('table:eq(0) tr:eq(3) td').eq(i).text(Math.round(data1.list[l].main.temp))
           $('table:eq(0) tr:eq(4) td').eq(i).text(Math.round(data1.list[l].main.pressure))
           $('table:eq(0) tr:eq(5) td').eq(i).text(Math.round(data1.list[l].clouds.all))
@@ -142,7 +142,7 @@ $(document).ready(function(){
 
 function  fillDataNextDay(ind, tableInd){
       for (var i=0; i< 8; i++){
-          $('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'http://openweathermap.org/img/w/' + data1.list[ind+i].weather[0].icon + '.png')
+          $('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'images/' + data1.list[ind+i].weather[0].icon + '.png')
           $('table').eq(tableInd).find('tr:eq(3) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
           $('table').eq(tableInd).find('tr:eq(4) td').eq(i+1).text(Math.round(data1.list[ind+i].main.pressure))
           $('table').eq(tableInd).find('tr:eq(5) td').eq(i+1).text(Math.round(data1.list[ind+i].clouds.all))
@@ -258,13 +258,13 @@ $('.city').click(function(){
 		$('#weather_desc>span').text(data1.list[0].weather[0].description)
 		$('#icon>span').text(data1.list[0].weather[0].icon)
 		$('#clouds>span').text(data1.list[0].clouds.all)	
-		$('img#main-img').attr('src', 'http://openweathermap.org/img/w/' + data1.list[0].weather[0].icon + '.png')
+		$('img#main-img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
 		var date = timestamp2date(data1.list[0].dt)
 		var day = Number(date.slice(5,7))
 		var month = getMonth(date.slice(8,11))
 		var DayOfWeek = getDayOfWeek(date.slice(0, 3))
 		$('.days').eq(0).find('.date>span').text(day + ' ' + month)
-		$('.days').eq(0).find('img').attr('src', 'http://openweathermap.org/img/w/' + data1.list[0].weather[0].icon + '.png')
+		$('.days').eq(0).find('img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
 		$('.days').eq(0).find('.day-name').text(DayOfWeek)
 		getfiveDays(day, month, DayOfWeek)
 		console.log(data1)
@@ -324,7 +324,7 @@ $('.city').click(function(){
 				var dopInd = ind + 8*i
 				$('.days').eq(i+1).find('.temp-max').text(Math.round(getMaxTemp(dopInd)))
 				$('.days').eq(i+1).find('.temp-min').text(Math.round(getMinTemp(dopInd)))
-				$('.days').eq(i+1).find('img').attr('src', 'http://openweathermap.org/img/w/'+ geticon(dopInd) +'.png')
+				$('.days').eq(i+1).find('img').attr('src', 'images/'+ geticon(dopInd) +'.png')
 
 			}
 		}
@@ -377,7 +377,7 @@ $('.city').click(function(){
 	}
         var l = 0
         for (var i=k; i<9; i++){
-          $('table:eq(0) tr:eq(2) td img').eq(i-1).attr('src', 'http://openweathermap.org/img/w/' + data1.list[i].weather[0].icon + '.png')
+          $('table:eq(0) tr:eq(2) td img').eq(i-1).attr('src', 'images/' + data1.list[i].weather[0].icon + '.png')
           $('table:eq(0) tr:eq(3) td').eq(i).text(Math.round(data1.list[l].main.temp))
           $('table:eq(0) tr:eq(4) td').eq(i).text(Math.round(data1.list[l].main.pressure))
           $('table:eq(0) tr:eq(5) td').eq(i).text(Math.round(data1.list[l].clouds.all))
@@ -388,10 +388,10 @@ $('.city').click(function(){
       }
     
       fillDataCarentDay()
-		
+
 		function  fillDataNextDay(ind, tableInd){
       for (var i=0; i< 8; i++){
-          $('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'http://openweathermap.org/img/w/' + data1.list[ind+i].weather[0].icon + '.png')
+          $('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'images/' + data1.list[ind+i].weather[0].icon + '.png')
           $('table').eq(tableInd).find('tr:eq(3) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
           $('table').eq(tableInd).find('tr:eq(4) td').eq(i+1).text(Math.round(data1.list[ind+i].main.pressure))
           $('table').eq(tableInd).find('tr:eq(5) td').eq(i+1).text(Math.round(data1.list[ind+i].clouds.all))
