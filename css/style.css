@@ -16,10 +16,13 @@ html, body {
 	min-height: 100%;
 	font: normal 100 % Cambria, Georgia, serif;
 	background: url(../images/gradient.png) no-repeat 50% 50%,
-	url(../images/main-bg.jpg) no-repeat 50% 50%;
+	url(../images/main-bg.png) no-repeat 50% 50%;
 	background-size: cover;
 }
-
+img {
+	max-height: 150px;
+	max-width: 150px;
+}
 .container {
 	display: flex;
 	flex-direction: column;
@@ -35,7 +38,6 @@ display: flex;
 justify-content: space-around;
 height: 7%;
 width: 100%;
-// border: 1px solid red;
 }
 
 .city {
@@ -53,14 +55,12 @@ width: 100%;
 	justify-content: flex-start;
 	height: 86%;
 	width: 100%;
-	// border: 1px solid black;
 }
 
 .left-block {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	// border: 1px solid red;
 	height: 100%;
 	width: 30%;
 }
@@ -72,26 +72,31 @@ width: 100%;
 }
 
 .left-block .days {
-	// display: flex;
 	height: 12%;
-	// border: 1px dashed green;
 	padding: 10px;
 }
 
-.days img, .days .temp, .days .day-name, .days .date {
+.days img, .days .temp-min,.days .temp-max,.days .temp, .days .day-name, .days .date {
 	display: inline-block;
 	vertical-align: middle;
-	// border: 1px dashed black;
 }
 
-.days .temp {
-	// border: 1px dashed green;
-	font-size: 2.5vh;
-	vertical-align: middle;
+.days img {
+	margin: -10px;
 }
 
-.days .temp .temp-min, .days .temp .temp-max {
+.days .temp-min{
+	vertical-align: bottom;
+}
+
+.days .temp-max {
+	vertical-align: top;
+}
+
+.days .temp-min, .days .temp-max {
 	color: #98d0eb;
+	font-family: 'Lobster', cursive;
+	font-size: 15px;
 }
 
 .days .day-name {
@@ -106,24 +111,23 @@ width: 100%;
 
 .days .date span {
 	font-size: 6vh;
-	// border: 1px solid yellow;
 	font-family: 'BetinaScriptC', arial;
 	color:#fff;
 	text-decoration: underline;
 	cursor: pointer;
 }
+
 .days:hover .date {
   transform: scale(1.4, 1.25) translateX(30px);
-
+text-shadow: 0px 0px 6px rgba(255,255,255,0.5);
 }
 .main-block {
 	width: 67%;
-	// border: 1px solid red;
 	display: flex;
 	flex-direction: column;
 	justify-content: flex-start;
-	// border: 1px solid green;
 }
+
 .main-block .main-info {
 	// display: none;
 	// display: flex;
@@ -137,33 +141,34 @@ width: 100%;
 	vertical-align: middle;
 	color: #1562a4;
 }
-
+.main-block .main-info #main-img {
+	margin-left: 100px;
+}
 .main-block .title {
 	color: #fff;
 	display: inline-block;
 	font-size: 45px;
 	margin: 0 auto;
-	// border: 1px solid green;
-	// font-family: 'BetinaScriptC', arial;
 }
-.main-block .main-info #weather_desc {
+.main-block #weather_desc {
 	color: #fff;
 	font-size: 35px;
-
-	// font-family: 'BetinaScriptC', arial;
-	// text-transform: uppercase;
 	font-style: italic;
+	text-align: center;
+
 }
 
 .main-block .main-info #temp {
 		color:#fff;
 	font-size: 65px;
-	font-family: 'BetinaScriptC', arial;
+	font-family: 'Lobster', cursive;
 	margin-right: 40px;
+	margin-top: -50px;
+	margin-left: -30px;
+	vertical-align: top;
 }
 
 .detail-info {
-	// border: 1px solid green;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
@@ -172,6 +177,7 @@ width: 100%;
 
 .active {
 	transform: scale(1.4, 1.25) translateX(30px);
+	text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
 }
 
 .hide {
@@ -195,9 +201,8 @@ th:first-child {
 th, tr, td {
 	background: rgba(255,255,255, 0.39);
 	border: none;
-	padding: 8px 15px 8px 15px;
+	padding: 5px 15px 5px 15px;
 	text-align: center;
-	// box-shadow: 3.7px 3.3px 37px rgba(0, 0, 0, 0.75);
 }
 th {
 	text-transform: uppercase;

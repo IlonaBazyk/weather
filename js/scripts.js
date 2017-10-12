@@ -69,12 +69,12 @@ $(document).ready(function(){
 		}
 
 		function sendTempIcon(ind){
-			$('.days').eq(0).find('.temp-max').text(getMaxTempToday(ind))
-			$('.days').eq(0).find('.temp-min').text(getMinTempToday(ind))
+			$('.days').eq(0).find('.temp-max>span').text(getMaxTempToday(ind))
+			$('.days').eq(0).find('.temp-min>span').text(getMinTempToday(ind))
 			for (var i=0; i<4; i++){
 				var dopInd = ind + 8*i
-				$('.days').eq(i+1).find('.temp-max').text(getMaxTemp(dopInd))
-				$('.days').eq(i+1).find('.temp-min').text(getMinTemp(dopInd))
+				$('.days').eq(i+1).find('.temp-max>span').text(getMaxTemp(dopInd))
+				$('.days').eq(i+1).find('.temp-min>span').text(getMinTemp(dopInd))
 				$('.days').eq(i+1).find('img').attr('src', 'images/'+ geticon(dopInd) +'.png')
 
 			}
@@ -98,76 +98,78 @@ $(document).ready(function(){
 			}
 		}
 
- function  fillDataCarentDay(){
-        var k
-        switch (data1.list[0].dt_txt.slice(11,16)) {
-		case '00:00':
-		k = '1';
-        break;
-		case '03:00':
-		k = '2';
-        break;
-		case '06:00':
-		k = '3';
-        break;
-		case '09:00':
-		k = '4';
-        break;
-		case '12:00':
-		k = '5';
-        break;
-		case '15:00':
-		k = '6';
-        break;
-		case '18:00':
-		k = '7';
-        break;
-          case '21:00':
-		k = '8';
-        break;
-	}
-        var l = 0
-        for (var i=k; i<9; i++){
-          $('table:eq(0) tr:eq(2) td img').eq(i-1).attr('src', 'images/' + data1.list[i].weather[0].icon + '.png')
-          $('table:eq(0) tr:eq(3) td').eq(i).text(Math.round(data1.list[l].main.temp))
-          $('table:eq(0) tr:eq(4) td').eq(i).text(Math.round(data1.list[l].main.pressure))
-          $('table:eq(0) tr:eq(5) td').eq(i).text(Math.round(data1.list[l].clouds.all))
-          $('table:eq(0) tr:eq(6) td').eq(i).text(Math.round(data1.list[l].main.temp))
-          $('table:eq(0) tr:eq(7) td').eq(i).text(Math.round(data1.list[l].wind.speed))
-          l++
-        }
-      }
-    
-      fillDataCarentDay()
+		function  fillDataCarentDay(){
+			var k
+			switch (data1.list[0].dt_txt.slice(11,16)) {
+				case '00:00':
+				k = '1';
+				break;
+				case '03:00':
+				k = '2';
+				break;
+				case '06:00':
+				k = '3';
+				break;
+				case '09:00':
+				k = '4';
+				break;
+				case '12:00':
+				k = '5';
+				break;
+				case '15:00':
+				k = '6';
+				break;
+				case '18:00':
+				k = '7';
+				break;
+				case '21:00':
+				k = '8';
+				break;
+			}
+			var l = 0
+			for (var i=k; i<9; i++){
+				$('table:eq(0) tr:eq(2) td img').eq(i-1).attr('src', 'images/' + data1.list[l].weather[0].icon + '.png')
+				$('table:eq(0) tr:eq(3) td').eq(i).text(Math.round(data1.list[l].main.temp))
+				$('table:eq(0) tr:eq(4) td').eq(i).text(Math.round(data1.list[l].main.pressure))
+				$('table:eq(0) tr:eq(5) td').eq(i).text(Math.round(data1.list[l].clouds.all))
+				$('table:eq(0) tr:eq(6) td').eq(i).text(Math.round(data1.list[l].main.temp))
+				$('table:eq(0) tr:eq(7) td').eq(i).text(Math.round(data1.list[l].wind.speed))
+				l++
+			}
+		}
 
-function  fillDataNextDay(ind, tableInd){
-      for (var i=0; i< 8; i++){
-          $('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'images/' + data1.list[ind+i].weather[0].icon + '.png')
-          $('table').eq(tableInd).find('tr:eq(3) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
-          $('table').eq(tableInd).find('tr:eq(4) td').eq(i+1).text(Math.round(data1.list[ind+i].main.pressure))
-          $('table').eq(tableInd).find('tr:eq(5) td').eq(i+1).text(Math.round(data1.list[ind+i].clouds.all))
-          $('table').eq(tableInd).find('tr:eq(6) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
-          $('table').eq(tableInd).find('tr:eq(7) td').eq(i+1).text(Math.round(data1.list[ind+i].wind.speed))
-        }
-    }
-    fillDataNextDay(searchIndexNext(), 1)
-      fillDataNextDay(searchIndexNext()+8, 2)
-      fillDataNextDay(searchIndexNext()+16, 3)
-      fillDataNextDay(searchIndexNext()+24, 4)
+		fillDataCarentDay()
+
+		function  fillDataNextDay(ind, tableInd){
+			for (var i=0; i< 8; i++){
+				$('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'images/' + data1.list[ind+i].weather[0].icon + '.png')
+				$('table').eq(tableInd).find('tr:eq(3) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
+				$('table').eq(tableInd).find('tr:eq(4) td').eq(i+1).text(Math.round(data1.list[ind+i].main.pressure))
+				$('table').eq(tableInd).find('tr:eq(5) td').eq(i+1).text(Math.round(data1.list[ind+i].clouds.all))
+				$('table').eq(tableInd).find('tr:eq(6) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
+				$('table').eq(tableInd).find('tr:eq(7) td').eq(i+1).text(Math.round(data1.list[ind+i].wind.speed))
+			}
+		}
+		fillDataNextDay(searchIndexNext(), 1)
+		fillDataNextDay(searchIndexNext()+8, 2)
+		fillDataNextDay(searchIndexNext()+16, 3)
+		fillDataNextDay(searchIndexNext()+24, 4)
 	});
 })
 
 
 $('.date').click(function(){
-    $('table').hide()
-    $('.date').removeClass('active') 
-    $(this). addClass('active')
-    $('#' + $(this).data('target')).show()  
-    if ($(this).data('target') !== 'table0'){
-    	$('.main-info').addClass('hide')
-    }else{
-    	$('.main-info').removeClass('hide')
-    }  
+	$('table').hide()
+	$('.date').removeClass('active') 
+	$(this). addClass('active')
+	$('#' + $(this).data('target')).show()  
+	if ($(this).data('target') !== 'table0'){
+		$('.main-info').addClass('hide')
+		$('#weather_desc').addClass('hide')
+	}else{
+		$('.main-info').removeClass('hide')
+		$('#weather_desc').removeClass('hide')
+	}  
 })
 
 
@@ -318,12 +320,12 @@ $('.city').click(function(){
 		}
 
 		function sendTempIcon(ind){
-			$('.days').eq(0).find('.temp-max').text(Math.round(getMaxTempToday(ind)))
-			$('.days').eq(0).find('.temp-min').text(Math.round(getMinTempToday(ind)))
+			$('.days').eq(0).find('.temp-max>span').text(Math.round(getMaxTempToday(ind)))
+			$('.days').eq(0).find('.temp-min>span').text(Math.round(getMinTempToday(ind)))
 			for (var i=0; i<4; i++){
 				var dopInd = ind + 8*i
-				$('.days').eq(i+1).find('.temp-max').text(Math.round(getMaxTemp(dopInd)))
-				$('.days').eq(i+1).find('.temp-min').text(Math.round(getMinTemp(dopInd)))
+				$('.days').eq(i+1).find('.temp-max>span').text(Math.round(getMaxTemp(dopInd)))
+				$('.days').eq(i+1).find('.temp-min>span').text(Math.round(getMinTemp(dopInd)))
 				$('.days').eq(i+1).find('img').attr('src', 'images/'+ geticon(dopInd) +'.png')
 
 			}
@@ -347,62 +349,62 @@ $('.city').click(function(){
 			}
 		}
 
- function  fillDataCarentDay(){
-        var k
-        switch (data1.list[0].dt_txt.slice(11,16)) {
-		case '00:00':
-		k = '1';
-        break;
-		case '03:00':
-		k = '2';
-        break;
-		case '06:00':
-		k = '3';
-        break;
-		case '09:00':
-		k = '4';
-        break;
-		case '12:00':
-		k = '5';
-        break;
-		case '15:00':
-		k = '6';
-        break;
-		case '18:00':
-		k = '7';
-        break;
-          case '21:00':
-		k = '8';
-        break;
-	}
-        var l = 0
-        for (var i=k; i<9; i++){
-          $('table:eq(0) tr:eq(2) td img').eq(i-1).attr('src', 'images/' + data1.list[i].weather[0].icon + '.png')
-          $('table:eq(0) tr:eq(3) td').eq(i).text(Math.round(data1.list[l].main.temp))
-          $('table:eq(0) tr:eq(4) td').eq(i).text(Math.round(data1.list[l].main.pressure))
-          $('table:eq(0) tr:eq(5) td').eq(i).text(Math.round(data1.list[l].clouds.all))
-          $('table:eq(0) tr:eq(6) td').eq(i).text(Math.round(data1.list[l].main.temp))
-          $('table:eq(0) tr:eq(7) td').eq(i).text(Math.round(data1.list[l].wind.speed))
-          l++
-        }
-      }
-    
-      fillDataCarentDay()
+		function  fillDataCarentDay(){
+			var k
+			switch (data1.list[0].dt_txt.slice(11,16)) {
+				case '00:00':
+				k = '1';
+				break;
+				case '03:00':
+				k = '2';
+				break;
+				case '06:00':
+				k = '3';
+				break;
+				case '09:00':
+				k = '4';
+				break;
+				case '12:00':
+				k = '5';
+				break;
+				case '15:00':
+				k = '6';
+				break;
+				case '18:00':
+				k = '7';
+				break;
+				case '21:00':
+				k = '8';
+				break;
+			}
+			var l = 0
+			for (var i=k; i<9; i++){
+				$('table:eq(0) tr:eq(2) td img').eq(i-1).attr('src', 'images/' + data1.list[l].weather[0].icon + '.png')
+				$('table:eq(0) tr:eq(3) td').eq(i).text(Math.round(data1.list[l].main.temp))
+				$('table:eq(0) tr:eq(4) td').eq(i).text(Math.round(data1.list[l].main.pressure))
+				$('table:eq(0) tr:eq(5) td').eq(i).text(Math.round(data1.list[l].clouds.all))
+				$('table:eq(0) tr:eq(6) td').eq(i).text(Math.round(data1.list[l].main.temp))
+				$('table:eq(0) tr:eq(7) td').eq(i).text(Math.round(data1.list[l].wind.speed))
+				l++
+			}
+		}
+
+		fillDataCarentDay()
 
 		function  fillDataNextDay(ind, tableInd){
-      for (var i=0; i< 8; i++){
-          $('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'images/' + data1.list[ind+i].weather[0].icon + '.png')
-          $('table').eq(tableInd).find('tr:eq(3) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
-          $('table').eq(tableInd).find('tr:eq(4) td').eq(i+1).text(Math.round(data1.list[ind+i].main.pressure))
-          $('table').eq(tableInd).find('tr:eq(5) td').eq(i+1).text(Math.round(data1.list[ind+i].clouds.all))
-          $('table').eq(tableInd).find('tr:eq(6) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
-          $('table').eq(tableInd).find('tr:eq(7) td').eq(i+1).text(Math.round(data1.list[ind+i].wind.speed))
-        }
-    }
-    fillDataNextDay(searchIndexNext(), 1)
-      fillDataNextDay(searchIndexNext()+8, 2)
-      fillDataNextDay(searchIndexNext()+16, 3)
-      fillDataNextDay(searchIndexNext()+24, 4)
+			for (var i=0; i< 8; i++){
+				$('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'images/' + data1.list[ind+i].weather[0].icon + '.png')
+				$('table').eq(tableInd).find('tr:eq(3) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
+				$('table').eq(tableInd).find('tr:eq(4) td').eq(i+1).text(Math.round(data1.list[ind+i].main.pressure))
+				$('table').eq(tableInd).find('tr:eq(5) td').eq(i+1).text(Math.round(data1.list[ind+i].clouds.all))
+				$('table').eq(tableInd).find('tr:eq(6) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
+				$('table').eq(tableInd).find('tr:eq(7) td').eq(i+1).text(Math.round(data1.list[ind+i].wind.speed))
+			}
+		}
+		fillDataNextDay(searchIndexNext(), 1)
+		fillDataNextDay(searchIndexNext()+8, 2)
+		fillDataNextDay(searchIndexNext()+16, 3)
+		fillDataNextDay(searchIndexNext()+24, 4)
 	}); 
 })
 
