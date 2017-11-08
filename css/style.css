@@ -1,195 +1,334 @@
 
 /*-------------------------
 	Simple reset
---------------------------*/
+	--------------------------*/
 
-*{
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
-}
+	*{
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	.active {
+		transform: scale(1.4, 1.25) translateX(1.6em);
+		text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
+	}
 
-html, body {
-	padding: 0;
-	margin: 0;
-	height: 100%;
-	min-height: 100%;
-	font: normal 100 % Cambria, Georgia, serif;
-	background: url(../images/gradient.png) no-repeat 50% 50%,
-	url(../images/main-bg.png) no-repeat 50% 50%;
-	background-size: cover;
-}
+	.hide {
+		display: none;
+	}
 
-.container {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 100%;
-	height: 99.8vh;
-	position: relative;
-	box-sizing: border-box;
-}
-.top-block, .bottom-block {
-display: flex;
-justify-content: space-around;
-height: 7%;
-width: 100%;
-}
 
-.city {
-	color: #fff;
-	font-size: 2vw;
-	cursor: pointer;
-}
+	html, body {
+		padding: 0;
+		margin: 0;
+		height: 100%;
+		min-height: 100%;
+		font: normal 100 % Cambria, Georgia, serif;
+		background: url(../images/gradient.png) no-repeat 50% 50%,
+		url(../images/main-bg.png) no-repeat 50% 50%;
+		background-size: cover;
+		background-attachment: fixed;
+	}
 
-.city:hover {
-	color: #98d0eb;
-}
+	.container {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		width: 100%;
+		height: 99.8vh;
+		position: relative;
+		box-sizing: border-box;
+	}
+	.top-block, .bottom-block {
+		display: flex;
+		justify-content: space-around;
+		height: 7%;
+		width: 100%;
+	}
 
-.middle-block {
-	display: flex;
-	justify-content: flex-start;
-	height: 86%;
-	width: 100%;
-}
+	.city {
+		color: #fff;
+		font-size: 2vw;
+		cursor: pointer;
+	}
 
-.left-block {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: 100%;
-	width: 30%;
-}
+	.city:hover {
+		color: #98d0eb;
+	}
 
-.left-block .days {
-	height: 12%;
-	padding: 10px;
-}
+	.middle-block {
+		display: flex;
+		justify-content: flex-start;
+		height: 86%;
+		width: 100%;
+	}
 
-.days img, .days .temp-min,.days .temp-max, .days .day-name, .days .date {
-	display: inline-block;
-	vertical-align: middle;
-}
-
-.days img {
-	margin: -10px;
-}
-
-.days .temp-min{
-	vertical-align: bottom;
-}
-
-.days .temp-max {
-	vertical-align: top;
-}
-
-.days .temp-min, .days .temp-max {
-	color: #98d0eb;
-	font-family: 'Lobster', cursive;
-	font-size: 15px;
-}
-
-.days .day-name {
-	background: url(../images/el-1.png) no-repeat center center;
-	background-size: cover;
-	color: #4e94cf;
-	font-size: 5vh;
-	padding: 1vh;
-	margin-left: 1.5vw;
-	text-transform: capitalize;
-}
-
-.days .date span {
-	font-size: 6vh;
-	font-family: 'BetinaScriptC', arial;
-	color:#fff;
-	text-decoration: underline;
-	cursor: pointer;
-}
-
-.days:hover .date {
-  transform: scale(1.4, 1.25) translateX(30px);
-	text-shadow: 0px 0px 6px rgba(255,255,255,0.5);
-}
-.main-block {
-	width: 67%;
-	display: flex;
-	flex-direction: column;
-	justify-content: flex-start;
-}
-
-.main-block .main-info > div, .main-block .main-info #main-img {
-	display: inline-block;
-	vertical-align: middle;
-	color: #1562a4;
-}
-.main-block .main-info #main-img {
-	margin-left: 100px;
-}
-.main-block .title {
-	color: #fff;
-	display: inline-block;
-	font-size: 45px;
-	margin: 0 auto;
-}
-.main-block #weather_desc {
-	color: #fff;
-	font-size: 35px;
-	font-style: italic;
-	text-align: center;
-
-}
-
-.main-block .main-info #temp {
+	.left-block {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		height: 100%;
+		width: 30%;
+	}
+	.mobile-main-info {
+		display: none;
+		padding: 0 30px;
+	}
+	
+	.mobile-main-info > div {
+		display: inline-block;
+		vertical-align: top;
+	}
+	.mobile-main-info .main-info #main-img {
+		max-height: 100px;
+	}
+	 .title {
+		color: #fff;
+		display: inline-block;
+		font-size: 1.6rem;
+		margin: 0 auto;
+	}
+	#weather_desc {
+		color: #fff;
+		font-size: 1.2rem;
+		font-style: italic;
+		text-align: center;
+	}
+	.mobile-main-info .main-info>*{
+		display: inline-block;
+	}
+	.main-info #temp {
 		color:#fff;
-	font-size: 65px;
-	font-family: 'Lobster', cursive;
-	margin-right: 40px;
-	margin-top: -50px;
-	margin-left: -30px;
-	vertical-align: top;
+		font-size: 3rem;
+		font-family: 'Lobster', cursive;
+		position: relative;
+		top:-1.3em;
+		left: -0.5em;
+	}
+	.buttons{
+		display: none;
+		position: absolute;
+		top: 30px;
+		right: 7px;
+	}
+	.buttons button{
+		font-size: 0.8rem;
+		margin-bottom: 10px;
+		padding: 0.4em 0.7em;
+		border: none;
+		border-radius: 10px;
+		border: 1px dotted white;
+		color: white;
+		background: transparent;
+		cursor: pointer;
+	}
+	.left-block .days {
+		height: 12%;
+		padding: 0.7em;
+	}
+
+	.days img, .days .temp-min,.days .temp-max, .days .day-name, .days .date {
+		display: inline-block;
+		vertical-align: middle;
+	}
+
+	.days img {
+		margin: -0.4em;
+	}
+
+	.days .temp-min{
+		vertical-align: bottom;
+	}
+
+	.days .temp-max {
+		vertical-align: top;
+	}
+
+	.days .temp-min, .days .temp-max {
+		color: #98d0eb;
+		font-family: 'Lobster', cursive;
+		font-size: 1rem;
+	}
+
+	.days .day-name {
+		background: url(../images/el-1.png) no-repeat center center;
+		background-size: cover;
+		color: #4e94cf;
+		font-size: 2em;
+		padding: 0.2em;
+		margin-left: 0.4em;
+		text-transform: capitalize;
+	}
+
+	.days .date span {
+		font-size: 2rem;
+		font-family: 'BetinaScriptC', arial;
+		color:#fff;
+		text-decoration: underline;
+		cursor: pointer;
+	}
+
+	.days:hover .date {
+		transform: scale(1.4, 1.25) translateX(1.6em);
+		text-shadow: 0px 0px 0.5em rgba(255,255,255,0.5);
+	}
+
+	@media  (max-width:1260px){
+		.days .temp-min, .days .temp-max {
+			font-size: 0.8rem;
+		}
+
+		.days .day-name {
+			font-size: 1.5rem;
+		}
+
+		.days .date span {
+			font-size: 1.5rem;
+		}
+	}
+
+	.main-block {
+		width: 67%;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+	}
+
+	.main-block .main-info > div, .main-block .main-info #main-img {
+		display: inline-block;
+		vertical-align: middle;
+		color: #1562a4;
+	}
+	.main-block .main-info #main-img {
+		margin-left: 5em;
+	}
+	.main-block .title {
+		font-size: 3rem;
+	}
+	.main-block #weather_desc {
+		font-size: 2.2rem;
+	}
+
+	.main-block .main-info #temp {
+		font-size: 5rem;
+		top:-0.8em;
+		left: -0.5em;
+	}
+	@media  (max-width:1260px){
+		.main-block .main-info #main-img {
+			max-height: 75px;
+		}
+		.main-block .title {
+			font-size: 2.2rem;
+		}
+		.main-block #weather_desc {
+			font-size: 1.5rem;
+		}
+
+		.main-block .main-info #temp {
+			font-size: 2.2rem;
+		}
+	}
+	.detail-info {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	table {
+		border: none;
+		margin: auto;
+		font-family: 'Lobster', cursive;
+		border-spacing: 2px;
+	}
+
+	#table1, #table2, #table3, #table4 {
+		display: none;
+	}
+
+	th:first-child {
+		visibility: hidden;
+	}
+	th, tr, td {
+		background: rgba(255,255,255, 0.39);
+		font-size: 1.1rem;
+		border: none;
+		padding: 0.3em 0.9em;
+		text-align: center;
+	}
+	td img {
+		width: 50px;
+	}
+	th {
+		text-transform: uppercase;
+	}
+
+	td:first-child {
+	// margin: 10px;
 }
 
-.detail-info {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	height: 100%;
+@media  (max-width:1260px){
+	th, tr, td {
+		font-size: 0.8rem;
+		padding: 0.3em 0.5em;
+	}
 }
 
-.active {
-	transform: scale(1.4, 1.25) translateX(30px);
-	text-shadow: 0px 0px 6px rgba(255,255,255,0.7);
+@media  (max-width:990px){
+	.container {
+		height: auto;
+	}
+	td img {
+		width: 30px;
+	}
+	th, tr, td {
+		font-size: 0.7rem;
+		padding: 0.3em 0.5em;
+	}
+	.middle-block {
+		flex-direction: column;
+		padding: 10px;
+	}
+	.main-block .title, .main-block #weather_desc, .main-block .main-info{
+		display: none;
+	}
+	.left-block {
+		justify-content: flex-end;
+		height: 100%;
+		width: 400px;
+		margin: auto;
+	}
+	.mobile-main-info {
+		display: block;
+	}
+	.buttons {
+		display: block;
+	}
+	.top-block, .bottom-block {
+		display: none;
+	}
+
 }
 
-.hide {
-	display: none;
-}
+@media  (max-width:368px){
+	.left-block {
+		justify-content: flex-end;
+		height: 100%;
+		width: 320px;
+		margin: auto;
+	}
+	.days .day-name {
+		font-size: 1rem;
+	}
 
-table {
-	border: none;
-	margin: auto;
-	font-family: 'Lobster', cursive;
-	border-spacing: 2px;
-   }
-
-#table1, #table2, #table3, #table4 {
-	display: none;
-}
-
-th:first-child {
-	visibility: hidden;
-}
-th, tr, td {
-	background: rgba(255,255,255, 0.39);
-	border: none;
-	padding: 5px 15px 5px 15px;
-	text-align: center;
-}
-th {
-	text-transform: uppercase;
-}
-
-td:first-child {
-	margin: 10px;
+	.days .date span {
+		font-size: 1.3rem;
+	}
+	.mobile-main-info .main-info #main-img {
+		max-height: 75px;
+	}
+		.mobile-main-info .main-info #temp {
+		font-size: 2.2rem;
+	}
 }

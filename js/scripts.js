@@ -2,7 +2,7 @@ $(document).ready(function(){
 	$.get('https://api.openweathermap.org/data/2.5/forecast?id=703448&units=metric&lang=ua&APPID=fd67a390d12405e06869f5d1fe3504cd', function(data1){
 		$('#humidity>span').text(data1.list[0].main.humidity)
 		$('#temp>span').text(Math.round(data1.list[0].main.temp))
-		$('#temp_max>span').text(getMinTemp(searchIndexNext(), 0)) 
+		$('#temp_max>span').text(getMaxTemp(searchIndexNext(), 0)) 
 		$('#temp_min>span').text(getMinTemp(searchIndexNext(), 0))
 		$('#wind_deg>span').text(data1.list[0].wind.deg)
 		$('#wind_speed>span').text(data1.list[0].wind.speed)
@@ -14,7 +14,7 @@ $(document).ready(function(){
 		var day = Number(date.slice(5,7))
 		var month = getMonth(date.slice(8,11))
 		var DayOfWeek = getDayOfWeek(date.slice(0, 3))
-
+		
 		function getfiveDays(today, month, nameday){
 			$('.days').eq(0).find('.date>span').text(today + ' ' + month)
 			$('.days').eq(0).find('img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
@@ -26,7 +26,7 @@ $(document).ready(function(){
 		}
 		
 		getfiveDays(day, month, DayOfWeek)
-
+		
 		function searchIndexNext(){
 			for (var i=0; i<11; i++){
 				var pp = data1.list[i].dt_txt.slice(8,10)
@@ -36,7 +36,7 @@ $(document).ready(function(){
 			}
 			return i
 		}
-
+		
 		function getMinTemp(ind, value) {
 			if (value == 0) {
 				var num=Number(data1.list[0].main.temp_min)
@@ -48,33 +48,33 @@ $(document).ready(function(){
 			} else {
 				var num=Number(data1.list[ind].main.temp_min)
 				for (var i=ind; i < ind+8;i++){
-					if (num>Number(data1.list[i].main.temp_min)){
+					if (num > Number(data1.list[i].main.temp_min)){
 						num=Number(data1.list[i].main.temp_min)
 					}
 				}
 			}
 			return Math.round(num)
 		}
-
+		
 		function getMaxTemp(ind, value) {
 			if (value == 0) {
 				var num=Number(data1.list[0].main.temp_max)
 				for (var i=1; i < ind;i++){
-					if (num<Number(data1.list[i].main.temp_max)){
-						num=Number(data1.list[i].main.temp_max)
+					if (num < Number(data1.list[i].main.temp_max)){
+						num = Number(data1.list[i].main.temp_max)
 					}
 				}
 			} else {
-				var num=Number(data1.list[ind].main.temp_max)
-				for (var i=ind; i < ind+8;i++){
-					if (num<Number(data1.list[i].main.temp_max)){
-						num=Number(data1.list[i].main.temp_max)
+				var num = Number(data1.list[ind].main.temp_max)
+				for (var i = ind; i < ind+8; i++){
+					if (num < Number(data1.list[i].main.temp_max)){
+						num = Number(data1.list[i].main.temp_max)
 					}
 				}
 			}
 			return Math.round(num)
 		}
-
+		
 		function sendTempIcon(ind){
 			$('.days').eq(0).find('.temp-max>span').text(getMaxTemp(ind, 0))
 			$('.days').eq(0).find('.temp-min>span').text(getMinTemp(ind, 0))
@@ -83,11 +83,11 @@ $(document).ready(function(){
 				$('.days').eq(i+1).find('.temp-max>span').text(getMaxTemp(dopInd, 1))
 				$('.days').eq(i+1).find('.temp-min>span').text(getMinTemp(dopInd, 1))
 				$('.days').eq(i+1).find('img').attr('src', 'images/'+ geticon(dopInd) +'.png')
-
+				
 			}
 		}
 		sendTempIcon(searchIndexNext())
-
+		
 		function geticon(ind) {
 			var arr = []
 			for (var i=ind; i < ind+8;i++){
@@ -96,15 +96,15 @@ $(document).ready(function(){
 			arr.sort()
 			if (arr[7]=='01n'){
 				return '01d'
-			} else if (arr[7]=='02n'){
+				} else if (arr[7]=='02n'){
 				return '02d'
-			} else if (arr[7]=='10n'){
+				} else if (arr[7]=='10n'){
 				return '10d'
-			} else {
+				} else {
 				return arr[7]
 			}
 		}
-
+		
 		function  fillDataCurrentDay(){
 			var k
 			switch (data1.list[0].dt_txt.slice(11,16)) {
@@ -144,9 +144,9 @@ $(document).ready(function(){
 				l++
 			}
 		}
-
+		
 		fillDataCurrentDay()
-
+		
 		function  fillDataNextDay(ind, tableInd){
 			for (var i=0; i< 8; i++){
 				$('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'images/' + data1.list[ind+i].weather[0].icon + '.png')
@@ -173,7 +173,7 @@ $('.date').click(function(){
 	if ($(this).data('target') !== 'table0'){
 		$('.main-info').addClass('hide')
 		$('#weather_desc').addClass('hide')
-	}else{
+		}else{
 		$('.main-info').removeClass('hide')
 		$('#weather_desc').removeClass('hide')
 	}  
@@ -267,7 +267,7 @@ $('.city').click(function(){
 		var day = Number(date.slice(5,7))
 		var month = getMonth(date.slice(8,11))
 		var DayOfWeek = getDayOfWeek(date.slice(0, 3))
-
+		
 		function getfiveDays(today, month, nameday){
 			$('.days').eq(0).find('.date>span').text(today + ' ' + month)
 			$('.days').eq(0).find('img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
@@ -278,7 +278,7 @@ $('.city').click(function(){
 			}		
 		}
 		getfiveDays(day, month, DayOfWeek)
-
+		
 		function searchIndexNext(){
 			for (var i=0; i<11; i++){
 				var pp = data1.list[i].dt_txt.slice(8,10)
@@ -288,8 +288,8 @@ $('.city').click(function(){
 			}
 			return i
 		}
-
-	function getMinTemp(ind, value) {
+		
+		function getMinTemp(ind, value) {
 			if (value == 0) {
 				var num=Number(data1.list[0].main.temp_min)
 				for (var i=1; i < ind;i++){
@@ -297,7 +297,7 @@ $('.city').click(function(){
 						num=Number(data1.list[i].main.temp_min)
 					}
 				}
-			} else {
+				} else {
 				var num=Number(data1.list[ind].main.temp_min)
 				for (var i=ind; i < ind+8;i++){
 					if (num>Number(data1.list[i].main.temp_min)){
@@ -307,7 +307,7 @@ $('.city').click(function(){
 			}
 			return Math.round(num)
 		}
-
+		
 		function getMaxTemp(ind, value) {
 			if (value == 0) {
 				var num=Number(data1.list[0].main.temp_max)
@@ -316,7 +316,7 @@ $('.city').click(function(){
 						num=Number(data1.list[i].main.temp_max)
 					}
 				}
-			} else {
+				} else {
 				var num=Number(data1.list[ind].main.temp_max)
 				for (var i=ind; i < ind+8;i++){
 					if (num<Number(data1.list[i].main.temp_max)){
@@ -326,7 +326,7 @@ $('.city').click(function(){
 			}
 			return Math.round(num)
 		}
-
+		
 		function sendTempIcon(ind){
 			$('.days').eq(0).find('.temp-max>span').text(Math.round(getMaxTemp(ind, 0)))
 			$('.days').eq(0).find('.temp-min>span').text(Math.round(getMinTemp(ind, 0)))
@@ -335,11 +335,11 @@ $('.city').click(function(){
 				$('.days').eq(i+1).find('.temp-max>span').text(Math.round(getMaxTemp(dopInd, 1)))
 				$('.days').eq(i+1).find('.temp-min>span').text(Math.round(getMinTemp(dopInd, 1)))
 				$('.days').eq(i+1).find('img').attr('src', 'images/'+ geticon(dopInd) +'.png')
-
+				
 			}
 		}
 		sendTempIcon(searchIndexNext())
-
+		
 		function geticon(ind) {
 			var arr = []
 			for (var i=ind; i < ind+8;i++){
@@ -348,15 +348,15 @@ $('.city').click(function(){
 			arr.sort()
 			if (arr[7]=='01n'){
 				return '01d'
-			} else if (arr[7]=='02n'){
+				} else if (arr[7]=='02n'){
 				return '02d'
-			} else if (arr[7]=='10n'){
+				} else if (arr[7]=='10n'){
 				return '10d'
-			} else {
+				} else {
 				return arr[7]
 			}
 		}
-
+		
 		function  fillDataCurrentDay(){
 			var k
 			switch (data1.list[0].dt_txt.slice(11,16)) {
@@ -396,9 +396,9 @@ $('.city').click(function(){
 				l++
 			}
 		}
-
+		
 		fillDataCurrentDay()
-
+		
 		function  fillDataNextDay(ind, tableInd){
 			for (var i=0; i< 8; i++){
 				$('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'images/' + data1.list[ind+i].weather[0].icon + '.png')
