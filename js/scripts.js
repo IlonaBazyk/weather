@@ -1,21 +1,22 @@
 $(document).ready(function(){  
 	$.get('https://api.openweathermap.org/data/2.5/forecast?id=703448&units=metric&lang=ua&APPID=fd67a390d12405e06869f5d1fe3504cd', function(data1){
 		$('#humidity>span').text(data1.list[0].main.humidity)
-		$('#temp>span').text(Math.round(data1.list[0].main.temp))
+		$('.temp>span').text(Math.round(data1.list[0].main.temp))
 		$('#temp_max>span').text(getMaxTemp(searchIndexNext(), 0)) 
 		$('#temp_min>span').text(getMinTemp(searchIndexNext(), 0))
 		$('#wind_deg>span').text(data1.list[0].wind.deg)
 		$('#wind_speed>span').text(data1.list[0].wind.speed)
-		$('#weather_desc>span').text(data1.list[0].weather[0].description)
+		$('.weather_desc>span').text(data1.list[0].weather[0].description)
 		$('#icon>span').text(data1.list[0].weather[0].icon)
 		$('#clouds>span').text(data1.list[0].clouds.all)	
-		$('img#main-img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
+		$('img.main-img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
 		var date = timestamp2date(data1.list[0].dt)
 		var day = Number(date.slice(5,7))
 		var month = getMonth(date.slice(8,11))
 		var DayOfWeek = getDayOfWeek(date.slice(0, 3))
 		
 		function getfiveDays(today, month, nameday){
+			/* -- виведення дат на 5 днів та даних на сьогодні в sidebar -- */
 			$('.days').eq(0).find('.date>span').text(today + ' ' + month)
 			$('.days').eq(0).find('img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
 			$('.days').eq(0).find('.day-name').text(nameday)
@@ -28,8 +29,8 @@ $(document).ready(function(){
 		getfiveDays(day, month, DayOfWeek)
 		
 		function searchIndexNext(){
+			/* -- в масиві годин шукаемо індекс з якого починається інформація на завтрашній день  -- */
 			for (var i=0; i<11; i++){
-				var pp = data1.list[i].dt_txt.slice(8,10)
 				if (data1.list[i].dt_txt.slice(8,10) !== data1.list[0].dt_txt.slice(8,10)){
 					break;
 				}
@@ -38,6 +39,7 @@ $(document).ready(function(){
 		}
 		
 		function getMinTemp(ind, value) {
+			/* -- шукаємо мінімальні температури на сьогодні і наступні дні -- */
 			if (value == 0) {
 				var num=Number(data1.list[0].main.temp_min)
 				for (var i=1; i < ind;i++){
@@ -57,6 +59,7 @@ $(document).ready(function(){
 		}
 		
 		function getMaxTemp(ind, value) {
+				/* -- шукаємо максимальні температури на сьогодні і наступні дні -- */
 			if (value == 0) {
 				var num=Number(data1.list[0].main.temp_max)
 				for (var i=1; i < ind;i++){
@@ -76,6 +79,7 @@ $(document).ready(function(){
 		}
 		
 		function sendTempIcon(ind){
+				/* -- виводимо температури та іконки в sidebar -- */
 			$('.days').eq(0).find('.temp-max>span').text(getMaxTemp(ind, 0))
 			$('.days').eq(0).find('.temp-min>span').text(getMinTemp(ind, 0))
 			for (var i=0; i<4; i++){
@@ -83,12 +87,12 @@ $(document).ready(function(){
 				$('.days').eq(i+1).find('.temp-max>span').text(getMaxTemp(dopInd, 1))
 				$('.days').eq(i+1).find('.temp-min>span').text(getMinTemp(dopInd, 1))
 				$('.days').eq(i+1).find('img').attr('src', 'images/'+ geticon(dopInd) +'.png')
-				
 			}
 		}
 		sendTempIcon(searchIndexNext())
 		
 		function geticon(ind) {
+				/* -- шукаємо найгіршу погоду за день -- */
 			var arr = []
 			for (var i=ind; i < ind+8;i++){
 				arr.push(data1.list[i].weather[0].icon)
@@ -106,6 +110,7 @@ $(document).ready(function(){
 		}
 		
 		function  fillDataCurrentDay(){
+			/* -- заповнюємо набличку на сьогодні -- */
 			var k
 			switch (data1.list[0].dt_txt.slice(11,16)) {
 				case '00:00':
@@ -148,6 +153,7 @@ $(document).ready(function(){
 		fillDataCurrentDay()
 		
 		function  fillDataNextDay(ind, tableInd){
+			/* -- заповнюємо набличку на наступні дні -- */
 			for (var i=0; i< 8; i++){
 				$('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'images/' + data1.list[ind+i].weather[0].icon + '.png')
 				$('table').eq(tableInd).find('tr:eq(3) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
@@ -172,15 +178,20 @@ $('.date').click(function(){
 	$('#' + $(this).data('target')).show()  
 	if ($(this).data('target') !== 'table0'){
 		$('.main-info').addClass('hide')
-		$('#weather_desc').addClass('hide')
+		$('.weather_desc').addClass('hide')
 		}else{
 		$('.main-info').removeClass('hide')
-		$('#weather_desc').removeClass('hide')
+		$('.weather_desc').removeClass('hide')
 	}  
 })
 
+$('.show-cities').click(function(){
+	/* ---- в моб версії відкриття і закриття списка при кліку на "міста" ---- */
+	$('.list-cities').toggleClass('show hide')
+})
 
 function arrDays(currentday){
+	/* -- сортуємо назви днів в залежності від сьогоднішнього дня -- */
 	var arr = ["пн", "вт", "ср", "чт", "пт", "сб", "нд"]
 	var arr1 = []
 	for (var i = arr.indexOf(currentday); i<7; i++){
@@ -200,6 +211,7 @@ function timestamp2date(timestamp) {
 
 
 function getDayOfWeek(number){
+	/* -- умова вибору назв днів -- */
 	switch (number) {
 		case 'Mon':
 		return 'пн';
@@ -219,6 +231,7 @@ function getDayOfWeek(number){
 }
 
 function getMonth(number){
+	/* -- умова вибору назв місяців -- */
 	switch (number) {
 		case 'Jan':
 		return 'січня';
@@ -251,24 +264,26 @@ function getMonth(number){
 $('.city').click(function(){  
 	var nameCity = $(this).data('name')
 	var id = $(this).data('id')
+	$('.list-cities').removeClass('show').addClass('hide')
 	$.get('https://api.openweathermap.org/data/2.5/forecast?id=' + id +'&units=metric&lang=ua&APPID=fd67a390d12405e06869f5d1fe3504cd', function(data1){
 		$('.title').text(nameCity)
 		$('#humidity>span').text(data1.list[0].main.humidity)
-		$('#temp>span').text(Math.round(data1.list[0].main.temp))
+		$('.temp>span').text(Math.round(data1.list[0].main.temp))
 		$('#temp_max>span').text(Math.round(getMaxTemp(searchIndexNext(), 0)))
 		$('#temp_min>span').text(Math.round(getMinTemp(searchIndexNext(), 0)))
 		$('#wind_deg>span').text(data1.list[0].wind.deg)
 		$('#wind_speed>span').text(data1.list[0].wind.speed)
-		$('#weather_desc>span').text(data1.list[0].weather[0].description)
+		$('.weather_desc>span').text(data1.list[0].weather[0].description)
 		$('#icon>span').text(data1.list[0].weather[0].icon)
 		$('#clouds>span').text(data1.list[0].clouds.all)	
-		$('img#main-img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
+		$('img.main-img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
 		var date = timestamp2date(data1.list[0].dt)
 		var day = Number(date.slice(5,7))
 		var month = getMonth(date.slice(8,11))
 		var DayOfWeek = getDayOfWeek(date.slice(0, 3))
 		
 		function getfiveDays(today, month, nameday){
+			/* -- виведення дат на 5 днів та даних на сьогодні в sidebar -- */
 			$('.days').eq(0).find('.date>span').text(today + ' ' + month)
 			$('.days').eq(0).find('img').attr('src', 'images/' + data1.list[0].weather[0].icon + '.png')
 			$('.days').eq(0).find('.day-name').text(nameday)
@@ -280,6 +295,7 @@ $('.city').click(function(){
 		getfiveDays(day, month, DayOfWeek)
 		
 		function searchIndexNext(){
+			/* -- в масиві годин шукаемо індекс з якого починається інформація на завтрашній день  -- */
 			for (var i=0; i<11; i++){
 				var pp = data1.list[i].dt_txt.slice(8,10)
 				if (data1.list[i].dt_txt.slice(8,10) !== data1.list[0].dt_txt.slice(8,10)){
@@ -290,6 +306,7 @@ $('.city').click(function(){
 		}
 		
 		function getMinTemp(ind, value) {
+			/* -- шукаємо мінімальні температури на сьогодні і наступні дні -- */
 			if (value == 0) {
 				var num=Number(data1.list[0].main.temp_min)
 				for (var i=1; i < ind;i++){
@@ -309,6 +326,7 @@ $('.city').click(function(){
 		}
 		
 		function getMaxTemp(ind, value) {
+			/* -- шукаємо максимальні температури на сьогодні і наступні дні -- */
 			if (value == 0) {
 				var num=Number(data1.list[0].main.temp_max)
 				for (var i=1; i < ind;i++){
@@ -328,6 +346,7 @@ $('.city').click(function(){
 		}
 		
 		function sendTempIcon(ind){
+			/* -- виводимо температури та іконки в sidebar -- */
 			$('.days').eq(0).find('.temp-max>span').text(Math.round(getMaxTemp(ind, 0)))
 			$('.days').eq(0).find('.temp-min>span').text(Math.round(getMinTemp(ind, 0)))
 			for (var i=0; i<4; i++){
@@ -341,6 +360,7 @@ $('.city').click(function(){
 		sendTempIcon(searchIndexNext())
 		
 		function geticon(ind) {
+			/* -- шукаємо найгіршу погоду за день -- */
 			var arr = []
 			for (var i=ind; i < ind+8;i++){
 				arr.push(data1.list[i].weather[0].icon)
@@ -358,6 +378,7 @@ $('.city').click(function(){
 		}
 		
 		function  fillDataCurrentDay(){
+			/* -- заповнюємо набличку на сьогодні -- */
 			var k
 			switch (data1.list[0].dt_txt.slice(11,16)) {
 				case '00:00':
@@ -400,6 +421,7 @@ $('.city').click(function(){
 		fillDataCurrentDay()
 		
 		function  fillDataNextDay(ind, tableInd){
+			/* -- заповнюємо набличку на наступні дні -- */
 			for (var i=0; i< 8; i++){
 				$('table').eq(tableInd).find('tr:eq(2) td img').eq(i).attr('src', 'images/' + data1.list[ind+i].weather[0].icon + '.png')
 				$('table').eq(tableInd).find('tr:eq(3) td').eq(i+1).text(Math.round(data1.list[ind+i].main.temp))
