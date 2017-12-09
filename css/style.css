@@ -188,7 +188,7 @@ html {
 	color: #fff;
 	font-family: 'Lobster', cursive;
 	display: inline-block;
-	font-size: 1.4rem;
+	font-size: 1.3rem;
 	margin: 0 auto;
 }
 .weather_desc {
@@ -266,6 +266,8 @@ html {
 	}
 	.mobile-main-info {
 		height: 50px;
+		padding-left: 0px;
+		padding-right: 0px;
 		display: -webkit-box;
 		display: -webkit-flex;
 		display: -ms-flexbox;
@@ -301,10 +303,6 @@ html {
 
 	.days .date span {
 		font-size: 1.3rem;
-	}
-	.mobile-main-info {
-		padding-left: 0px;
-		padding-right: 0px;
 	}
 	.mobile-main-info .main-info .main-img {
 		max-height: 65px;
@@ -447,7 +445,7 @@ th {
 
 @media  (max-width:430px){
 	th, tr, td {
-		font-size: 0.5rem;
+		font-size: 0.45rem;
 		padding: 0.3em 0.5em;
 	}
 	td img {
